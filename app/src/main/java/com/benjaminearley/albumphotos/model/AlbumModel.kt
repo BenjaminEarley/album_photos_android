@@ -13,11 +13,15 @@ class AlbumModel(private val albumRepository: IAlbumRepository) : IAlbumModel {
     override fun getAlbums() = flow<Result<List<Album>>> {
         emit(Loading())
         try {
-            emit(Success(albumRepository.getAlbums().take(10)))
+            emit(Success(albumRepository.getAlbums().take(limit)))
         } catch (exception: Exception) {
             emit(Error(exception.message ?: getString(R.string.error)))
         }
     }.flowOn(Dispatchers.IO)
+
+    companion object {
+        const val limit = 10
+    }
 }
 
 interface IAlbumModel {

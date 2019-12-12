@@ -16,12 +16,16 @@ class PhotoModel(private val photoRepository: IPhotoRepository) : IPhotoModel {
             val photos =
                 photoRepository
                     .getPhotos(albumId ?: throw UnsupportedOperationException())
-                    .take(10)
+                    .take(limit)
             emit(Success(photos))
         } catch (exception: Exception) {
             emit(Error(exception.message ?: getString(R.string.error)))
         }
     }.flowOn(Dispatchers.IO)
+
+    companion object {
+        const val limit = 10
+    }
 }
 
 interface IPhotoModel {

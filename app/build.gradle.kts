@@ -63,6 +63,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:$moshi")
     implementation("com.squareup.picasso:picasso:2.71828")
     testImplementation("junit:junit:4.12")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines")
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
