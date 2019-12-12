@@ -6,9 +6,9 @@ import com.benjaminearley.albumphotos.repository.IAlbumRepository
 import com.benjaminearley.albumphotos.repository.IPhotoRepository
 import com.benjaminearley.albumphotos.repository.data.Album
 import com.benjaminearley.albumphotos.repository.data.Photo
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.random.Random
 
