@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.benjaminearley.albumphotos"
-        minSdkVersion(19)
+        minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
@@ -55,8 +55,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle")
     implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle")
     implementation("com.google.android.material:material:1.0.0")
-    // KitKat requirements prevent updating to OkHttp4 :(
-    @Suppress("GradleDependency") implementation("com.squareup.okhttp3:okhttp:3.14.4")
+    implementation("com.squareup.okhttp3:okhttp:4.2.2")
     implementation("com.squareup.retrofit2:retrofit:$retrofit")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit")
     implementation("com.squareup.moshi:moshi:$moshi")

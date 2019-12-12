@@ -1,9 +1,11 @@
 package com.benjaminearley.albumphotos.ui.photos
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,6 +31,20 @@ class PhotosFragment : Fragment() {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().findViewById<Toolbar>(R.id.toolbar).navigationIcon = null
+                requireActivity().supportFragmentManager.popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            callback
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,10 +55,7 @@ class PhotosFragment : Fragment() {
 
         requireActivity().findViewById<Toolbar>(R.id.toolbar).apply {
             navigationIcon = loadDrawable(R.drawable.ic_arrow_back, R.color.white)
-            setNavigationOnClickListener {
-                requireActivity().onBackPressed()
-                navigationIcon = null
-            }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
 
         val photosViewModel: PhotosViewModel by viewModels {
