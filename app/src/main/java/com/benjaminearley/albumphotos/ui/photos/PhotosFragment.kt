@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.benjaminearley.albumphotos.AlbumPhotosApplication
-import com.benjaminearley.albumphotos.R
-import com.benjaminearley.albumphotos.divider
-import com.benjaminearley.albumphotos.loadDrawable
+import com.benjaminearley.albumphotos.*
+import com.benjaminearley.albumphotos.model.PhotoModel
 import com.benjaminearley.albumphotos.repository.PhotoRepository
+import com.benjaminearley.albumphotos.repository.data.Photo
 import com.benjaminearley.albumphotos.repository.network.TypicodeService
 import com.google.android.material.snackbar.Snackbar
 
@@ -49,9 +48,11 @@ class PhotosFragment : Fragment() {
         val photosViewModel: PhotosViewModel by viewModels {
             PhotosViewModelFactory(
                 arguments?.getString(ALBUM_ID),
-                PhotoRepository(
-                    TypicodeService.create(
-                        AlbumPhotosApplication.instance.retrofit
+                PhotoModel(
+                    PhotoRepository(
+                        TypicodeService.create(
+                            AlbumPhotosApplication.instance.retrofit
+                        )
                     )
                 )
             )
@@ -63,14 +64,12 @@ class PhotosFragment : Fragment() {
             adapter = photoAdapter
         }
 
-        photosViewModel.getPhotos().observe(viewLifecycleOwner, Observer<Result> {
+        photosViewModel.getPhotos().observe(viewLifecycleOwner, Observer<Result<List<Photo>>> {
             when (it) {
-                Loading -> Unit //TODO
-                is Success -> photoAdapter.submitList(it.photos)
+                is Loading -> Unit //TODO
+                is Success -> photoAdapter.submitList(it.data)
                 is Error -> Snackbar.make(requireView(), it.error, Snackbar.LENGTH_LONG).show()
             }
         })
     }
-
-
 }

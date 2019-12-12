@@ -3,38 +3,24 @@ package com.benjaminearley.albumphotos.ui.albums
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
-import com.benjaminearley.albumphotos.R
-import com.benjaminearley.albumphotos.getString
-import com.benjaminearley.albumphotos.repository.IAlbumRepository
+import androidx.lifecycle.asLiveData
+import com.benjaminearley.albumphotos.Result
+import com.benjaminearley.albumphotos.model.IAlbumModel
 import com.benjaminearley.albumphotos.repository.data.Album
-import kotlinx.coroutines.Dispatchers
 
-class AlbumsViewModel(private val repository: IAlbumRepository) : ViewModel() {
+class AlbumsViewModel(model: IAlbumModel) : ViewModel() {
 
-    private val albums = liveData(Dispatchers.IO) {
-        emit(Loading)
-        try {
-            emit(Success(repository.getAlbums(limit = 10)))
-        } catch (exception: Exception) {
-            emit(Error(exception.message ?: getString(R.string.error)))
-        }
-    }
+    private val albums = model.getAlbums().asLiveData()
 
-    fun getAlbums(): LiveData<Result> = albums
+    fun getAlbums(): LiveData<Result<List<Album>>> = albums
 }
 
-sealed class Result
-object Loading : Result()
-data class Success(val albums: List<Album>) : Result()
-data class Error(val error: String) : Result()
-
 @Suppress("UNCHECKED_CAST")
-class AlbumsViewModelFactory(private val repository: IAlbumRepository) :
+class AlbumsViewModelFactory(private val model: IAlbumModel) :
     ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return AlbumsViewModel(repository) as T
+        return AlbumsViewModel(model) as T
     }
 
 }
