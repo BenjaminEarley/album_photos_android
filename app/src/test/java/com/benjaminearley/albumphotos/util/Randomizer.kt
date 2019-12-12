@@ -1,4 +1,4 @@
-package com.benjaminearley.albumphotos
+package com.benjaminearley.albumphotos.util
 
 import kotlin.random.Random
 

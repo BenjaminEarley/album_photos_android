@@ -11,7 +11,7 @@ import com.benjaminearley.albumphotos.R
 import com.benjaminearley.albumphotos.inflate
 import com.benjaminearley.albumphotos.repository.data.Photo
 
-class PhotoAdapter : ListAdapter<Photo, PhotoViewHolder>(Photo.DIFF_CALLBACK) {
+class PhotoAdapter : ListAdapter<Photo, PhotoViewHolder>(Photo.diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder =
         PhotoViewHolder(parent.inflate(R.layout.photos_list_item))
 

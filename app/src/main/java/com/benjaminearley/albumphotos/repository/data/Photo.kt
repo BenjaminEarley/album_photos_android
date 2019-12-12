@@ -10,7 +10,7 @@ data class Photo(
     val thumbnailUrl: String
 ) {
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<Photo> =
+        val diffCallback: DiffUtil.ItemCallback<Photo> =
             object : DiffUtil.ItemCallback<Photo>() {
                 override fun areItemsTheSame(
                     oldItem: Photo,

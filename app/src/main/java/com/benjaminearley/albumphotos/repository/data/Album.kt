@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 data class Album(val id: String, val userId: String, val title: String) {
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<Album> =
+        val diffCallback: DiffUtil.ItemCallback<Album> =
             object : DiffUtil.ItemCallback<Album>() {
                 override fun areItemsTheSame(
                     oldItem: Album,

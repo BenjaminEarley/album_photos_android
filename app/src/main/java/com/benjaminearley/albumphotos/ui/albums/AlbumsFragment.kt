@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 class AlbumsFragment : Fragment() {
 
     companion object {
-        const val ALBUM_LIST = "albumList"
+        const val albumListName = "albumList"
 
         fun newInstance() =
             AlbumsFragment()
@@ -63,7 +63,7 @@ class AlbumsFragment : Fragment() {
             .supportFragmentManager
             .beginTransaction()
             .add(R.id.container, PhotosFragment.newInstance(album.id))
-            .addToBackStack(ALBUM_LIST)
+            .addToBackStack(albumListName)
             .commit()
     }
 }

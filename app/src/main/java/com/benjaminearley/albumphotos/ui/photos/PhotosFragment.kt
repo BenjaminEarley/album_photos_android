@@ -22,11 +22,11 @@ class PhotosFragment : Fragment() {
 
     companion object {
 
-        private const val ALBUM_ID = "albumId"
+        private const val albumIdKey = "albumId"
 
         fun newInstance(albumId: String): PhotosFragment {
             val fragment = PhotosFragment()
-            fragment.arguments = Bundle().apply { putString(ALBUM_ID, albumId) }
+            fragment.arguments = Bundle().apply { putString(albumIdKey, albumId) }
             return fragment
         }
     }
@@ -60,7 +60,7 @@ class PhotosFragment : Fragment() {
 
         val photosViewModel: PhotosViewModel by viewModels {
             PhotosViewModelFactory(
-                arguments?.getString(ALBUM_ID),
+                arguments?.getString(albumIdKey),
                 PhotoModel(
                     PhotoRepository(
                         TypicodeService.create(

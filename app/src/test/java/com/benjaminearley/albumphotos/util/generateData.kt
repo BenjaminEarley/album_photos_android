@@ -1,4 +1,4 @@
-package com.benjaminearley.albumphotos
+package com.benjaminearley.albumphotos.util
 
 import com.benjaminearley.albumphotos.repository.data.Album
 import com.benjaminearley.albumphotos.repository.data.Photo

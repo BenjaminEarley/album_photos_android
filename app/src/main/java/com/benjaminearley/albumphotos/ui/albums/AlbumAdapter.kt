@@ -11,7 +11,7 @@ import com.benjaminearley.albumphotos.repository.data.Album
 
 class AlbumAdapter(
     private val tapListener: (Album) -> Unit
-) : ListAdapter<Album, AlbumViewHolder>(Album.DIFF_CALLBACK) {
+) : ListAdapter<Album, AlbumViewHolder>(Album.diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder =
         AlbumViewHolder(parent.inflate(R.layout.albums_list_item))
 
